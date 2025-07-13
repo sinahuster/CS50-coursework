@@ -32,6 +32,14 @@ int word_score(string word)
     for (int i = 0, n = strlen(word); i < n; i++)
     {
         toupper(word[1]);
-        if (word[1] == ())
+        if (word[1] == ('A' || 'E'|| 'I' || 'L' || 'N' || 'O' || 'R' || 'S' || 'T' || 'U'))
+        {
+            points++;
+        }
+        else if (word[1] == ('D' || 'G'))
+        {
+            point += 2
+        }
+        else if (word[1] == ('B' || 'C'|| 'I' || 'L' || 'N' || 'O' || 'R' || 'S' || 'T' || 'U'))
     }
 }
