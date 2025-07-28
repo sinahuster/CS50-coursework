@@ -1,0 +1,48 @@
+sort1 uses: Bubble Sort
+
+How do you know?:
+This sort gets significantly faster on sortef input, indicating less passes are used once numbers are already in place.
+Much slower on unsorted data due to O(n^2) complexity.
+
+random5000: 0.048s
+random10000: 0.195s
+random50000: 7.45s
+reversed5000: 0.066s
+reversed10000: 0.217s
+reversed50000: 5.73s
+sorted5000: 0.011s
+sorted10000: 0.029s
+sorted50000: 0.932s
+
+sort2 uses: Merge Sort
+
+How do you know?:
+Consistent times across all inputs, sorted inputs are not significantly faster and larger inputs are non significantly slower.
+O(n log n) complexity is efficient on large data sets.
+
+random5000: 0.013s
+random10000: 0.028s
+random50000: 0.555s
+reversed5000: 0.014s
+reversed10000: 0.03s
+reversed50000: 2.054s
+sorted5000: 0.014s
+sorted10000: 0.03s
+sorted50000: 1.14s
+
+sort3 uses: Selection Sort
+
+How do you know?:
+All times are approximately the same, not dependant on how the numbers are ordered.
+This indicates the same precidure is carried out no matter, it is non-adaptive.
+O(n^2) complexity. 
+
+random5000: 0.036s
+random10000: 0.153s
+random50000: 3.43s
+reversed5000: 0.039s
+reversed10000: 0.164s
+reversed50000: 3.59s
+sorted5000: 0.036s
+sorted10000: 0.129s
+sorted50000: 3.43s
