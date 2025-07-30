@@ -32,6 +32,7 @@ void add_pairs(void);
 void sort_pairs(void);
 void lock_pairs(void);
 void print_winner(void);
+bool is_connected(int w, int l);
 
 int main(int argc, string argv[])
 {
@@ -115,8 +116,8 @@ bool vote(int rank, string name, int ranks[])
 // Update preferences given one voter's ranks
 void record_preferences(int ranks[])
 {
-    // Iterate over the number of candidates, and within that again but making sure j is always larger than i.
-    // We then increment the preferences array for the indexes stored in ranks[]
+    // Iterate over the number of candidates, and within that again but making sure j is always
+    // larger than i. We then increment the preferences array for the indexes stored in ranks[]
     for (int i = 0; i < candidate_count; i++)
     {
         for (int j = i + 1; j < candidate_count; j++)
@@ -172,8 +173,10 @@ void sort_pairs(void)
     {
         for (int i = 0; i < pair_count - 1 - j; i++)
         {
-            // If i,j have less of a difference to i+1,j+1, we swap then so the highest votes are at the top
-            if (preferences[pairs[i].winner][pairs[i].loser] < preferences[pairs[i+1].winner][pairs[i+1].loser])
+            // If i,j have less of a difference to i+1,j+1, we swap then so the highest votes are at
+            // the top
+            if (preferences[pairs[i].winner][pairs[i].loser] <
+                preferences[pairs[i + 1].winner][pairs[i + 1].loser])
             {
                 pair temporary = pairs[i];
                 pairs[i] = pairs[i + 1];
@@ -182,6 +185,30 @@ void sort_pairs(void)
         }
     }
     return;
+}
+
+// This helper function will be used recursively in lock_pairs, to determine if there is a cycle
+bool is_connected(int w, int l)
+{
+    // base case
+    if (locked[l][w])
+    {
+        return true;
+    }
+
+    // Iterates over all possible connections and uses recursion to determine if i is connected to
+    // w.
+    for (int i = 0; i < candidate_count; i++)
+    {
+        if (locked[l][i])
+        {
+            if (is_connected(w, i))
+            {
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 // Lock pairs into the candidate graph in order, without creating cycles
@@ -193,17 +220,13 @@ void lock_pairs(void)
     {
         int winner = pairs[i].winner;
         int loser = pairs[i].loser;
-
-        for (int j = 0; j < candidate_count; j++)
+        if (is_connected(winner, loser))
         {
-            if (locked[j][winner])
-            {
-                continue;
-            }
-            else
-            {
-                locked[winner][loser] = true;
-            }
+            continue;
+        }
+        else
+        {
+            locked[winner][loser] = true;
         }
     }
     return;
@@ -214,14 +237,16 @@ void print_winner(void)
 {
     // Define a boolean variable which will keep track of whether the the candidate
     // has any other candidates winning over them.
-    bool source = true;
+    bool source;
 
     // Iterate over the candidates, and if they are the second index of any true locked
     // boolean value then they are not the source.
     // If they are not then source remains true and they are the winner.
     for (int i = 0; i < candidate_count; i++)
     {
-        for (int j = 0; j < candidate_count; i++)
+        source = true;
+
+        for (int j = 0; j < candidate_count; j++)
         {
             if (locked[j][i])
             {
