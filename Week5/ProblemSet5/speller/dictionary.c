@@ -1,10 +1,11 @@
 // Implements a dictionary's functionality
-
+#include <cs50.h>
 #include <ctype.h>
 #include <stdbool.h>
-#include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <strings.h>
 
 #include "dictionary.h"
 
@@ -15,24 +16,52 @@ typedef struct node
     struct node *next;
 } node;
 
-// TODO: Choose number of buckets in hash table
-const unsigned int N = 26;
+// Choose number of buckets in hash table
+const unsigned int N = 26 * 26 * LENGTH;
 
 // Hash table
 node *table[N];
 
+// Counter for loaded words
+int count = 0;
+
 // Returns true if word is in dictionary, else false
 bool check(const char *word)
 {
-    // TODO
+    // Hash the word, to obtain it's location in the hash table
+    int index = hash(word);
+
+    // Go through the linked list at the location of table[index] and check if
+    // any of the strings match with the word
+    for (node *ptr = table[index]; ptr != NULL; ptr = ptr->next)
+    {
+        if (strcasecmp(word, ptr->word) == 0)
+        {
+            return true;
+        }
+    }
     return false;
 }
 
 // Hashes word to a number
 unsigned int hash(const char *word)
 {
-    // TODO: Improve this hash function
-    return toupper(word[0]) - 'A';
+    // Find the length of the word
+    int len = strlen(word);
+
+    // Single character words will be the first 26 indices
+    if (strlen(word) == 1)
+    {
+        return toupper(word[0]) - 'A';
+    }
+
+    // Calculate the values of each letter
+    int first = toupper(word[0]) - 'A';
+    int second = toupper(word[1]) - 'A';
+
+    // Return hash value dependent on the first 2 letters of the word,
+    // offset by 26 values
+    return (first * 26 + second) * len;
 }
 
 // Loads dictionary into memory, returning true if successful, else false
@@ -48,28 +77,22 @@ bool load(const char *dictionary)
     char buffer[LENGTH + 1];
 
     // Read each word in the file
-    while(fscanf(source, "%s", buffer) != EOF)
+    while (fscanf(source, "%s", buffer) != EOF)
     {
         node *new_word = malloc(sizeof(node));
         new_word->next = NULL;
         strcpy(new_word->word, buffer);
 
         // Obtain the hash value of the word
-        int index = hash (new_word->word);
+        int index = hash(new_word->word);
 
-        // Add each word to the hash table
-        if (table[index] == NULL)
-        {
-            // Assign new word the index in the hash table
-            table[index] = new_word;
-        }
-        else
-        {
-            // Prepend the word to the list which is found at the index of the hash table
-            new_word->next = table[index];
-            table[index] = new_word;
-        }
+        // Assign new word the index in the hash table
+        // or prepend the word to the list which is found at the index of the hash table
+        new_word->next = table[index];
+        table[index] = new_word;
 
+        // Increment the counter for the number of words loaded
+        count++;
     }
 
     // Close the dictionary file
@@ -81,13 +104,22 @@ bool load(const char *dictionary)
 // Returns number of words in dictionary if loaded, else 0 if not yet loaded
 unsigned int size(void)
 {
-    // TODO
-    return 0;
+    return count;
 }
 
 // Unloads dictionary from memory, returning true if successful, else false
 bool unload(void)
 {
-    // TODO
-    return false;
+    // Loop through the hash table, to clear each index
+    for (int i = 0; i < N; i++)
+    {
+        node *ptr = table[i];
+        while (ptr != NULL)
+        {
+            node *next = ptr->next;
+            free(ptr);
+            ptr = next;
+        }
+    }
+    return true;
 }
