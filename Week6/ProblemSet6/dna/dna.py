@@ -4,10 +4,13 @@ import sys
 
 def main():
 
-    # TODO: Check for command-line usage
-    
+    # Check for command-line usage
+    if len(sys.argv) != 3:
+        print("Missing comand line arguement. Expected ./dna cvs-file tex-file")
+        sys.exit(1)
 
-    # TODO: Read database file into a variable
+    # Read database file into a variable
+    
 
     # TODO: Read DNA sequence file into a variable
 
