@@ -1,6 +1,10 @@
+import string
+
+# get the greeting input from the user
 greeting = str(input("Greeting: ")).strip()
 
-first_word = greeting.split()[0]
+# determine the first word of the greeting
+first_word = greeting.split()[0].strip(string.punctuation)
 
 if first_word.lower() == 'hello':
     dollars = 0
