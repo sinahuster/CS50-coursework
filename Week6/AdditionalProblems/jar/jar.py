@@ -2,9 +2,8 @@ class Jar:
     def __init__(self, capacity=12):
         self.capacity = capacity
 
-    #def __str__(self):
-    #    pass
-    #🍪
+    def __str__(self):
+        return self.size * "🍪"
 
     def deposit(self, n):
         pass
@@ -22,4 +21,4 @@ class Jar:
 """
 
 jar = Jar()
-print(jar.capacity)
+print(jar)
