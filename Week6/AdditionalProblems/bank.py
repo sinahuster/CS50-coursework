@@ -3,7 +3,7 @@ greeting = str(input("Greeting: "))
 dollars = 0
 
 for word in greeting:
-    if word == 'hello':
+    if word == 'Hello':
         break
     else:
         for char in word:
