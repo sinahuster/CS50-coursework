@@ -14,11 +14,11 @@ class Jar:
 
     @property
     def capacity(self):
-        pass
+        return self.capacity
 
     @property
     def size(self):
-        pass
+        return self.size
 
 
 jar = Jar()
