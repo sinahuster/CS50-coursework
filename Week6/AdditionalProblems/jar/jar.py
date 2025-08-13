@@ -22,6 +22,7 @@ class Jar:
 
 
 jar = Jar()
+jar.capacity = 500
 print(jar)
 jar.deposit(25)
 print(jar)
