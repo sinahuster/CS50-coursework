@@ -9,10 +9,13 @@ class Jar:
         return "🍪" * self._size + "/" + str(self._capacity)
 
     def deposit(self, n):
-        if
+        if n < 1 or (n + self._size) > self._capacity:
+            raise ValueError
         self._size += n
 
     def withdraw(self, n):
+        if n < 1 or (self._size - n) < 0:
+            raise ValueError
         self._size -= n
 
     @property
