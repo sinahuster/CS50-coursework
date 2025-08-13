@@ -33,8 +33,8 @@ def main():
     print(longest)
 
     # Check database for matching profiles
-    #for row in data:
-     #   for i in range
+    for row in data:
+        for i in range 
 
     return
 
