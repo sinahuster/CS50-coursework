@@ -9,4 +9,4 @@ elif first_word.lower().startswith('h'):
 else:
     dollars = 100
 
-print(f"$ {dollars}")
+print(f"${dollars}")
