@@ -1,3 +1,13 @@
+def main():
+    jar = Jar()
+    print(str(jar.capacity))
+    print(str(jar))
+    jar.deposit(6)
+    print(str(jar))
+    jar.withdraw(4)
+    print(str(jar))
+
+
 class Jar:
     def __init__(self, capacity=12):
         if capacity < 1:
@@ -6,7 +16,7 @@ class Jar:
         self._size = 0
 
     def __str__(self):
-        return "🍪" * self._size + "/" + str(self._capacity)
+        return "🍪" * self._size
 
     def deposit(self, n):
         if n < 1 or (n + self._size) > self._capacity:
@@ -27,10 +37,4 @@ class Jar:
         return self._size
 
 
-jar = Jar()
-print(str(jar.capacity))
-print(str(jar))
-jar.deposit(6)
-print(str(jar))
-jar.withdraw(4)
-print(str(jar))
+main()
