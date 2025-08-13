@@ -1,16 +1,9 @@
-greeting = str(input("Greeting: "))
+greeting = str(input("Greeting: ")).split()
 
-dollars = 0
+first_word = greeting.split()[0]
 
-for word in greeting:
-    if word == 'Hello':
-        break
-    else:
-        for char in word:
-            if char == 'h':
-                dollars = 20
-                break
-            else:
-                dollars = 100
-                break
+if first_word.lower() == 'hello':
+    dollars = 0
+elif first_word.lower().startswith('h)
+
 print(f"$ {dollars}")
