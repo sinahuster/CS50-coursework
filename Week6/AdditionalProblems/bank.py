@@ -13,4 +13,4 @@ for word in greeting:
             else:
                 dollars = 100
                 break
-print()
+print(f"$ {dollars}")
