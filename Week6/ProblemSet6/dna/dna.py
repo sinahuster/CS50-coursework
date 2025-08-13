@@ -25,6 +25,8 @@ def main():
     # Find longest match of each STR in DNA sequence
     sequence = csv_reader.fieldnames
     print(sequence)
+    longest = []
+    for i in sequence 
 
     # TODO: Check database for matching profiles
 
