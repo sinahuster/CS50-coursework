@@ -5,6 +5,7 @@ from pyfiglet import Figlet
 figlet = Figlet()
 fonts = figlet.getFonts()
 
+# check the command line arguements and therefore determine the font
 if len(sys.argv) == 1:
     font = random.choice(fonts)
 elif len(sys.argv) == 3 and (argv[1] == '-f' or argv[1] == '--font'):
@@ -13,8 +14,11 @@ else:
     print("Invalid usage")
     sys.exit(1)
 
-
-text = str(input("Input: "))
+#set the font
 f = figlet.setFont(font=font)
 
+# ask for the text
+text = str(input("Input: "))
+
+# print the text in the new font 
 print(f"Output: {figlet.renderText(text)}")
