@@ -34,7 +34,8 @@ def main():
 
     # Check database for matching profiles
     for row in data:
-        for i in range 
+        for k, v in row:
+            if k == 
 
     return
 
