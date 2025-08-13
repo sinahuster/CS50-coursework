@@ -27,5 +27,7 @@ jar.deposit(25)
 print(jar)
 jar.withdraw(5)
 print(jar)
-jar._capacity = 500
-print(jar)
+#jar._capacity = 500
+#print(jar)
+print(jar.size)
+print(jar._size)
