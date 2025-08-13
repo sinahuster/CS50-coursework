@@ -4,22 +4,26 @@ class Jar:
         self.size = 0
 
     def __str__(self):
-        return "🍪" * self.size
+        return "🍪" * self.size + "/" + str(self.capacity)
 
     def deposit(self, n):
-        pass
+        self.size += n
 
     def withdraw(self, n):
-        pass
+        self.size -= n
 
-"""    @property
+    @property
     def capacity(self):
         pass
 
     @property
     def size(self):
         pass
-"""
+
 
 jar = Jar()
+print(jar)
+jar.deposit(25)
+print(jar)
+jar.withdraw(5)
 print(jar)
