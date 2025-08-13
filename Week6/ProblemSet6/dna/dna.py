@@ -34,11 +34,9 @@ def main():
 
     # Check database for matching profiles
     for row in data:
+        match = True
         for i in range(len(longest)):
-            if row.value[i+1] == longest[i]:
-                continue
-            else:
-                break 
+            if int(row[sequence[i+1]]) == longest
 
     return
 
