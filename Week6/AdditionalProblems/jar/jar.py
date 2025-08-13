@@ -22,4 +22,4 @@ class Jar:
 """
 
 jar = Jar()
-print(jar)
+print(jar.capacity)
