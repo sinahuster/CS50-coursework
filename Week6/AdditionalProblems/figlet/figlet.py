@@ -13,4 +13,4 @@ else:
     print("Invalid usage")
     sys.exit(1)
 
-
+text = str(input("Input: "))
