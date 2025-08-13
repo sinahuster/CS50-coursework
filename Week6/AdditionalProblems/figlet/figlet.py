@@ -14,3 +14,5 @@ else:
     sys.exit(1)
 
 text = str(input("Input: "))
+
+print(f"Output: {figlet.renderText(text)}")
