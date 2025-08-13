@@ -15,6 +15,7 @@ def main():
         csv_reader = csv.DictReader(file)
         for row in csv_reader:
             data.append(row)
+    print(data)
 
 
     # Read DNA sequence file into a variable
@@ -32,8 +33,8 @@ def main():
     print(longest)
 
     # Check database for matching profiles
-    for row in data:
-        for i in range 
+    #for row in data:
+     #   for i in range
 
     return
 
