@@ -26,7 +26,9 @@ def main():
     sequence = csv_reader.fieldnames
     print(sequence)
     longest = []
-    for i in sequence 
+    for i in sequence range(1,(len(sequence) - 1)):
+        longest[i] = longest_match(dna, sequence[i])
+    print(longest)
 
     # TODO: Check database for matching profiles
 
