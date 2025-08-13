@@ -36,7 +36,11 @@ def main():
     for row in data:
         match = True
         for i in range(len(longest)):
-            if int(row[sequence[i+1]]) == longest
+            if int(row[sequence[i+1]]) != longest[i]:
+                match = False
+                break
+        if match:
+            print()
 
     return
 
