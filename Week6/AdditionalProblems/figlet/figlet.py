@@ -15,6 +15,6 @@ else:
 
 
 text = str(input("Input: "))
-f = figlet.setFonts(font=font)
+f = figlet.setFont(font=font)
 
 print(f"Output: {figlet.renderText(text)}")
