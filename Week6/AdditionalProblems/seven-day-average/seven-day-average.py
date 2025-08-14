@@ -14,7 +14,7 @@ def main():
 
     # Construct 14 day lists of new cases for each states
     new_cases = calculate(reader)
-'''
+
     # Create a list to store selected states
     states = []
     print("Choose one or more states to view average COVID cases.")
@@ -31,19 +31,60 @@ def main():
 
     # Print out 7-day averages for this week vs last week
     comparative_averages(new_cases, states)
-'''
 
-# TODO: Create a dictionary to store 14 most recent days of new cases by state
+
+# Create a dictionary to store 14 most recent days of new cases by state
 def calculate(reader):
-    print(reader)
-    dict = 
+    new_cases = {}
+    previous_cases = {}
+
+    # Iterating through the rows in the reader
     for row in reader:
-        pass
-    return
+        state = row["state"]
+        total_cases = int(row["cases"])
+
+        # Determine whether the state already has data stored
+        if state in new_cases:
+            if len(new_cases[state]) == 14:
+                new_cases[state].pop(0)
+
+            # add the new data
+            daily_new = total_cases - previous_cases[state]
+            new_cases[state].append(daily_new)
+        # If no data is yet stored, create a key for the state
+        else:
+            new_cases[state] = []  # skip first day
+        previous_cases[state] = total_cases
+
+    return new_cases
 
 
-# TODO: Calculate and print out seven day average for given state
+# Calculate and print out seven day average for given state
 def comparative_averages(new_cases, states):
+
+    # Iterating through the states
+    for state in states:
+        previous_seven = sum(new_cases[state][:7]) / 7
+        current_seven = sum(new_cases[state][7:14]) / 7
+
+        # Finding the difference
+        difference = current_seven - previous_seven
+        try:
+            percent = (difference / previous_seven) * 100
+        except ZeroDivisionError:
+            print(f"{state}: Previous 7-day avg was 0, cannot compute percentage change.")
+            continue
+
+        # Convert to integers for printing
+        previous_seven = int(previous_seven)
+        current_seven = int(current_seven)
+        percent = int(percent)
+
+        print(f"{state} has a 7-day average of {current_seven} and ", end="")
+        if percent > 0:
+            print(f"an increase of {percent}%.")
+        else:
+            print(f"a decrease of {abs(percent)}%.")
     return
 
 
