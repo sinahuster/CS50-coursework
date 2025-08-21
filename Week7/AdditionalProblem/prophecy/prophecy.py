@@ -1,5 +1,8 @@
 from cs50 import SQL
 
+# This ensures the file exists
+open("new_roster.db", "a").close()
+
 # Open database
 db = SQL("sqlite:///new_roster.db")
 
