@@ -4,4 +4,5 @@ from cs50 import SQL
 db = SQL("sqlite:///roster.db")
 
 # Create table
-student = db.execute("CREATE TABLE student(id INTEGER, name TEXT)")
+student = db.execute("CREATE TABLE students(id INTEGER, name TEXT, PRIMARY KEY(id))")
+house = db.execute("CREATE TABLE houses(id INTEGER, name TEXT, PRIMARY KEY(id))")
