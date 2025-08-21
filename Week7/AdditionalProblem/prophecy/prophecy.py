@@ -1,4 +1,5 @@
 from cs50 import SQL
+import csv
 
 # This ensures the file exists
 open("new_roster.db", "a").close()
@@ -11,7 +12,7 @@ db.execute("CREATE TABLE IF NOT EXISTS students(id INTEGER, name TEXT, PRIMARY K
 db.execute("CREATE TABLE IF NOT EXISTs houses(id INTEGER, house TEXT, house_head TEXT, PRIMARY KEY(id))")
 db.execute("CREATE TABLE IF NOT EXISTS house_assignments(student_id INTEGER, house_id INTEGER, FOREIGN KEY(student_id) REFERENCES students(id), FOREIGN KEY(house_id) REFERENCES houses(id))")
 
-data = open()
+data = open("students.csv", )
 
 # Check table contents
 print(db.execute("SELECT * FROM students"))
