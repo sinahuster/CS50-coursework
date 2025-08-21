@@ -1,0 +1,12 @@
+The listner's audio aura seems upbeat and energetic, it contains lots of musci that has a high danceability.
+This suggests that they enjoy must to dance to and which is mainly cheerful.
+This would be based off the valence, energy and danceability.
+If the values are low, then their aura may be more refelctive or melancholic.
+
+
+This way of calculating aura misses a couple factors.
+Mainly, the number of times a song was played, a song that was played significantly more would be a more accurate
+representation of their taste or aura.
+I would also say there are some aspect of the music missing on which to judge it, such as lyrics, genre or tempo.
+To improve, I would most definitely weight the songs based on the number of plays they have, and incorporate a few
+more data points for the songs. 
