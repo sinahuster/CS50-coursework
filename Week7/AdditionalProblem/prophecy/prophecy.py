@@ -1,1 +1,3 @@
-from cs50 i
+from cs50 import SQL
+
+
