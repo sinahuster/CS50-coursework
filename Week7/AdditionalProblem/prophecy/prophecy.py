@@ -8,9 +8,9 @@ open("new_roster.db", "a").close()
 db = SQL("sqlite:///new_roster.db")
 
 # Delete tables that already exsist
+db.execute("DROP TABLE IF EXISTS house_assignments")
 db.execute("DROP TABLE IF EXISTS students")
 db.execute("DROP TABLE IF EXISTS houses")
-db.execute("DROP TABLE IF EXISTS house_assignments")
 
 # Create table
 db.execute("CREATE TABLE IF NOT EXISTS students(id INTEGER, name TEXT, PRIMARY KEY(id))")
@@ -26,18 +26,14 @@ with open('students.csv', 'r') as file:
         data.append(row)
 
 for row in data:
-    print(row)
     db.execute("INSERT INTO students (id, name) values (?, ?)", row['id'], row['student_name'])
     if not row['house'] in houses:
         result = db.execute("INSERT INTO houses (house, house_head) values(?, ?)", row['house'], row['head'])
-        #houses[row['house']] = result.lastrowid
-        print(result)
-    #house_id = houses[row['house']]
-    #db.execute("INSERT INTO house_assignments(student_id, house_id) values(?, ?)", row['id'], house_id)
-
-db.execute("SELECT * FROM students")
+        houses[row['house']] = result
+    house_id = houses[row['house']]
+    db.execute("INSERT INTO house_assignments(student_id, house_id) values(?, ?)", row['id'], house_id)
 
 # Check table contents
-#print(db.execute("SELECT * FROM students"))
-#print(db.execute("SELECT * FROM houses"))
-#print(db.execute("SELECT * FROM house_assignments"))
+print(db.execute("SELECT * FROM students"))
+print(db.execute("SELECT * FROM houses"))
+print(db.execute("SELECT * FROM house_assignments"))
