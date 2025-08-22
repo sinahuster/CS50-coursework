@@ -19,7 +19,7 @@ with open('students.csv', 'r') as file:
         data.append(row)
 
 for row in data:
-    db.execute("INSERT INTO students (id, name) values (row['id'], row['name'])", row['id'])
+    db.execute("INSERT INTO students (id, name) values (?, row['name'])", row['id'])
     db.execute("INSERT INTO houses (id, house, house_head) values(row)")
 
 # Check table contents
