@@ -9,7 +9,7 @@ db = SQL("sqlite:///new_roster.db")
 
 # Create table
 db.execute("CREATE TABLE IF NOT EXISTS students(id INTEGER, name TEXT, PRIMARY KEY(id))")
-db.execute("CREATE TABLE IF NOT EXISTs houses(id INTEGER, house TEXT, house_head TEXT, PRIMARY KEY(id))")
+db.execute("CREATE TABLE IF NOT EXISTs houses(id INTEGER, house TEXT UNIQUE, house_head TEXT, PRIMARY KEY(id))")
 db.execute("CREATE TABLE IF NOT EXISTS house_assignments(student_id INTEGER, house_id INTEGER, FOREIGN KEY(student_id) REFERENCES students(id), FOREIGN KEY(house_id) REFERENCES houses(id))")
 
 data = []
