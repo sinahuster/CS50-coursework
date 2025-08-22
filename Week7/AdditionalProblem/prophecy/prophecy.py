@@ -21,6 +21,7 @@ with open('students.csv', 'r') as file:
         data.append(row)
 
 for row in data:
+    print(row)
     db.execute("INSERT INTO students (id, name) values (?, ?)", row['id'], row['student_name'])
     if not row['house'] in houses:
         result = db.execute("INSERT INTO houses (house, house_head) values(?, ?)", row['house'], row['head'])
