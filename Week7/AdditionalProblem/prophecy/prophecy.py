@@ -13,6 +13,7 @@ db.execute("CREATE TABLE IF NOT EXISTs houses(id INTEGER, house TEXT UNIQUE, hou
 db.execute("CREATE TABLE IF NOT EXISTS house_assignments(student_id INTEGER, house_id INTEGER, FOREIGN KEY(student_id) REFERENCES students(id), FOREIGN KEY(house_id) REFERENCES houses(id))")
 
 data = []
+houses = []
 with open('students.csv', 'r') as file:
     csv_reader = csv.DictReader(file)
     for row in csv_reader:
