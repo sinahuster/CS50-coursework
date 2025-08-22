@@ -24,7 +24,8 @@ for row in data:
     db.execute("INSERT INTO students (id, name) values (?, ?)", row['id'], row['name'])
     if not row['house'] in houses:
         db.execute("INSERT INTO houses (house, house_head) values(?, ?)", row['house'], row['head'])
-        house_id = db.execute 
+        houses[row['house']] = db.lastrowid
+    
 
 # Check table contents
 #print(db.execute("SELECT * FROM students"))
