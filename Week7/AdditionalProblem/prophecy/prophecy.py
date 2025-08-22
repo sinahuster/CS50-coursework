@@ -20,7 +20,7 @@ with open('students.csv', 'r') as file:
 
 for row in data:
     db.execute("INSERT INTO students (id, name) values (row['id'], row['name'])")
-    db.execute("INSERT INTO houses (id, house, house_head) values(row))
+    db.execute("INSERT INTO houses (id, house, house_head) values(row)")
 
 # Check table contents
 #print(db.execute("SELECT * FROM students"))
