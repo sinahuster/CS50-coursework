@@ -6,7 +6,8 @@
         <link href="styles.css" rel="stylesheet">
         <title>Trivia!</title>
         <script>
-             document.addEventListener('DOMContentLoaded', function(){
+             document.addEventListener('DOMContentLoaded', function()
+             {
 
                 // Group correct elements
                 let correct_ans = document.querySelectorAll('.correct');
@@ -14,12 +15,12 @@
                 // Add event listener to each correct button
                 for (let i = 0; i < correct_ans.length; i++)
                 {
-                    correct_ans[i].addEventListener('change', function() {
-
+                    correct_ans[i].addEventListener('change', function()
+                    {
                         // Change colour to green
                         correct_ans[i].style.backgroundColor = 'Green';
 
-                        // Print incorrect below
+                        // Print correct below
                         let result = document.querySelector('.feedback');
                         result.innerHTML = 'Correct!';
 
@@ -29,7 +30,15 @@
                 // Group incorrect elements
                 let incorrect_ans = document.querySelectorAll('.incorrect');
 
-                for (let i = 0; i < )
+                for (let i = 0; i < incorrect_ans.length; i++)
+                {
+                    // Change colour to red
+                    incorrect.ans[i].style.backgroundColor = 'Red';
+
+                    // Print incorrect below
+                    let result = document.querySelector('.feedback');
+                    result.innerHTML = 'Incorrect';
+                }
 
              });
 
