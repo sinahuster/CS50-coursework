@@ -24,7 +24,7 @@
                         let result = document.querySelector('.feedback');
                         result.innerHTML = 'Correct!';
 
-                    })
+                    });
                 }
 
                 // Group incorrect elements
@@ -41,12 +41,11 @@
                     let result = document.querySelector('.feedback');
                     result.innerHTML = 'Incorrect!';
 
-                })
+                });
                 }
 
                 // Check the free response
-                document.querySelector('#check').addEventListner('click', funtion()
-                {
+                document.querySelector('#check').addEventListener('click', funtion() {
                     let input = document.querySelector('input');
                     if (input.value == 'Gryffindor')
                     {
@@ -56,11 +55,11 @@
                     else
                     {
                         input.style.backgroundColor = 'Red';
-                        document.querySelector('.feedback').innerHTML = 'Inorrect';
+                        document.querySelector('.feedback').innerHTML = 'Incorrect';
 
                     }
 
-                })
+                });
 
              });
 
