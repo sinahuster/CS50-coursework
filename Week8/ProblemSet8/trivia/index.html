@@ -48,7 +48,17 @@
                 document.querySelector('#check').addEventListner('click', funtion()
                 {
                     let input = document.querySelector('input');
-                    if (input.value == )
+                    if (input.value == 'Gryffindor')
+                    {
+                        input.style.backgroundColor = 'Green';
+                        document.querySelector('.feedback').innerHTML = 'Correct!';
+                    }
+                    else
+                    {
+                        input.style.backgroundColor = 'Red';
+                        document.querySelector('.feedback').innerHTML = 'Inorrect';
+
+                    }
 
                 })
 
