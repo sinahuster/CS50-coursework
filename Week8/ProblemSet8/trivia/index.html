@@ -32,12 +32,16 @@
 
                 for (let i = 0; i < incorrect_ans.length; i++)
                 {
+                    incorrect_ans[i].addEventListener('change', function()
+                {
                     // Change colour to red
                     incorrect.ans[i].style.backgroundColor = 'Red';
 
                     // Print incorrect below
                     let result = document.querySelector('.feedback');
                     result.innerHTML = 'Incorrect';
+
+                })
                 }
 
              });
