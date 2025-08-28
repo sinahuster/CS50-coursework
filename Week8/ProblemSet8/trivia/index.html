@@ -15,7 +15,7 @@
                 // Add event listener to each correct button
                 for (let i = 0; i < correct_ans.length; i++)
                 {
-                    correct_ans[i].addEventListener('change', function()
+                    correct_ans[i].addEventListener('click', function()
                     {
                         // Change colour to green
                         correct_ans[i].style.backgroundColor = 'Green';
@@ -32,14 +32,14 @@
 
                 for (let i = 0; i < incorrect_ans.length; i++)
                 {
-                    incorrect_ans[i].addEventListener('change', function()
+                    incorrect_ans[i].addEventListener('click', function()
                 {
                     // Change colour to red
                     incorrect_ans[i].style.backgroundColor = 'Red';
 
                     // Print incorrect below
                     let result = document.querySelector('.feedback');
-                    result.innerHTML = 'Incorrect';
+                    result.innerHTML = 'Incorrect!';
 
                 })
                 }
@@ -57,31 +57,12 @@
             <div class="section">
                 <h2>Part 1: Multiple Choice </h2>
                 <hr>
-                <!-- TODO: Add multiple choice question here -->
-                <form>
-                    <fieldset>
-                        <h3>What is the name of the centaur who takes over teaching Divination after Professor Trelawney is sacked?</h3>
-
-                        <div class = "correct">
-                            <input type="radio" id="1" name="option" value="Firenze" checked />
-                            <label for="1">Firenze</label>
-                        </div>
-                        <div class = "incorrect">
-                            <input type="radio" id="2" name="option" value="Magorian" checked />
-                            <label for="2">Magorian</label>
-                        </div>
-                        <div class = "incorrect">
-                            <input type="radio" id="3" name="option" value="Bane" checked />
-                            <label for="3">Bane</label>
-                        </div>
-                        <div class = "incorrect">
-                            <input type="radio" id="4" name="option" value="Ronan" checked />
-                            <label for="3">Ronan</label>
-                        </div>
-
-                         <p class="feedback"></p>
-                    </fieldset>
-                </form>
+                <h3>What is the name of the centaur who takes over teaching Divination after Professor Trelawney is sacked?</h3>
+                <button class = "correct">Firenze </button>
+                <button class = "incorrect">Magorian </button>
+                <button class = "incorrect">Bane </button>
+                <button class = "incorrect">Ronan </button>
+                <p class="feedback"></p>
             </div>
 
             <div class="section">
