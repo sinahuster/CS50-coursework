@@ -41,5 +41,18 @@
         <footer class="bg-light text-center text-muted py-3 fixed-bottom">
             <p>&copy; 2025 Sina Huster. All rights reserved.</p>
         </footer>
+        
+        <script>
+            const btn = document.getElementById("darkModeBtn");
+
+            btn.addEventListener("click", function() {
+                document.body.classList.toggle("bg-dark");
+                document.body.classList.toggle("text-light");
+
+                // Optional: toggle button color so it always looks visible
+                btn.classList.toggle("btn-light");
+                btn.classList.toggle("btn-dark");
+            });
+        </script>
     </body>
 </html>
