@@ -91,3 +91,11 @@ body.bg-dark {
     transition: background-color 0.5s, color 0.5s;
 }
 
+button:hover {
+    background-color: #477bff;
+    color: #fff;
+    cursor: pointer;
+    transform: scale(1.05);
+    transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
