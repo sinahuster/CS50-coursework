@@ -61,3 +61,21 @@ input[type="text"]:hover {
     transition: color 2s ease-in-out, background-color 0.15s ease-in-out;
 }
 
+p {
+    font-family: 'Arial', sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.caption {
+    font-style: italic;
+    font-size: 0.9rem;
+    color: #555;
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+
+
