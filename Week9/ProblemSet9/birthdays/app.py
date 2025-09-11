@@ -48,6 +48,8 @@ def index():
 
         # TODO: Display the entries in the database on index.html
 
-        return render_template("index.html")
+        birthdays = dbexecute("SELECT * FROM birthdays")
+
+        return render_template("index.html", birthdays=birthdays)
 
 
