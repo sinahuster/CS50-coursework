@@ -30,15 +30,15 @@ def index():
 
         name = request.form.get("friend")
         if not name:
-            redirect("/")
+            return redirect("/")
 
         day = request.form.get("day")
         if not day:
-            redirect("/")
+            return redirect("/")
 
         month = request.form.get("month")
         if not month:
-            redirct("/")
+            return redirct("/")
 
         db.execute("INSERT INTO birthdays (name, day, month) VALUES(?, ?, ?)", name, day, month)
 
