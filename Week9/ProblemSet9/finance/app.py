@@ -142,8 +142,8 @@ def register():
         try:
             new_user_id = db.execute("INSERT INTO users (username, hash) VALUES (?, ?)", username, password_hash)
 
-        except ValueError:
-            return apology("This username already exsists")
+        except (ValueError, sqlite3.IntegrityError):
+            return apology("This username already exists")
 
         # Check in case ValueError wasn't raised
         if not new_user_id:
