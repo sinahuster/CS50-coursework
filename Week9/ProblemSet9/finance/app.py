@@ -107,7 +107,7 @@ def logout():
 def quote():
     """Get stock quote."""
 
-    
+
     return apology("TODO")
 
 
@@ -139,6 +139,11 @@ def register():
 
         # Hash the password
         password_hash = generate_password_hash(password)
+
+        # Check if a username exsists 
+        existing = db.execute("SELECT * FROM users WHERE username = ?", username)
+        if existing:
+            return apology("This username already exists")
 
         # Try the insert the person into the database
         try:
