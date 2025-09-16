@@ -15,7 +15,7 @@
 
                 <h2>Add a Birthday</h2>
                 <!-- TODO: Create a form for users to submit a name, a month, and a day -->
-                 <form actio="/", method="POST">
+                 <form action="/", method="POST">
                     <input name="friend", type="text", placeholder="name">
                     <input name="day", type="number", placeholder="day" min="1", max="31">
                     <input name="month", type="number", placeholder="month", min="1", max="12">
@@ -42,7 +42,7 @@
                             <td>{{ bday.day }}/{{ bday.month }}</td>
                         </tr>
                         {% endfor %}
-                        
+
                     </tbody>
                 </table>
             </div>

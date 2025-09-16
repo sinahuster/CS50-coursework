@@ -112,7 +112,48 @@ def quote():
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """Register user"""
-    return apology("TODO")
+
+    # If the user has reached the route POST
+    if request.method == "POST":
+        name = request.form.get("name")
+        password = request.form.get("password")
+        confirmation = request.form.get("confirmation")
+
+        # Check if the username is blank
+        if not name:
+            return apology("Please enter a username")
+
+        # Check if the password is blank
+        if not password:
+            return apology("Please enter a password")
+
+        # Check if the confirmation is blank
+        if not confirmation:
+            return apology("Please enter a confirmation")
+
+        # Check if the password and confirmation match
+        if password != confirmation:
+            return apology("The passwords do not match")
+
+        # Hash the password
+        hash = generate_password_hash(password)
+
+        # Try the insert the person into the database
+        try:
+            new_user_id = db.execute("INSERT INTO users (username, hash) VALUES (?, ?)", name, hash)
+
+        except ValueError:
+            return apology("This username already exsists")
+
+        # Log in the user automatically
+        session["user_id"] = new_user_id
+
+        # Redirect user to home page
+        return redirect("/")
+
+    # User reached route via GET (as by clicking a link or via redirect)
+    else:
+        return render_template("register.html")
 
 
 @app.route("/sell", methods=["GET", "POST"])
