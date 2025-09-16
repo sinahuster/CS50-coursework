@@ -115,12 +115,12 @@ def register():
 
     # If the user has reached the route POST
     if request.method == "POST":
-        name = request.form.get("name")
+        username = request.form.get("username")
         password = request.form.get("password")
         confirmation = request.form.get("confirmation")
 
         # Check if the username is blank
-        if not name:
+        if not username:
             return apology("Please enter a username")
 
         # Check if the password is blank
@@ -140,7 +140,7 @@ def register():
 
         # Try the insert the person into the database
         try:
-            new_user_id = db.execute("INSERT INTO users (username, hash) VALUES (?, ?)", name, hash)
+            new_user_id = db.execute("INSERT INTO users (username, hash) VALUES (?, ?)", username, hash)
 
         except ValueError:
             return apology("This username already exsists")
