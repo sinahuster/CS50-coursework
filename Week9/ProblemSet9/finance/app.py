@@ -107,6 +107,9 @@ def logout():
 def quote():
     """Get stock quote."""
 
+    if request.method == "POST":
+        symbol = request.form.get("symbol")
+        
 
     return apology("TODO")
 
@@ -140,7 +143,7 @@ def register():
         # Hash the password
         password_hash = generate_password_hash(password)
 
-        # Check if a username exsists 
+        # Check if a username exsists
         existing = db.execute("SELECT * FROM users WHERE username = ?", username)
         if existing:
             return apology("This username already exists")
