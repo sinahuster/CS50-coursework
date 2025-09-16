@@ -1,16 +1,16 @@
 {% block main %}
-
-<form action="/register" method="post">
-    <div class="mb-3">
-        <input class="form-control" name="username" type="text" placeholder="Username" required>
-    </div>
-    <div class="mb-3">
-        <input class="form-control" name="password" type="password" placeholder="Password" required>
-    </div>
-    <div class="mb-3">
-        <input class="form-control" name="confirmation" type="password" placeholder="Confirm Password" required>
-    </div>
-    <button class="btn btn-primary" type="submit">Register</button>
-</form>
-
+<div class="d-flex justify-content-center align-items-center" style="height: 70vh;"></div>
+    <form action="/register" method="post">
+        <div class="mb-3">
+            <input class="form-control" name="username" type="text" placeholder="Username" required>
+        </div>
+        <div class="mb-3">
+            <input class="form-control" name="password" type="password" placeholder="Password" required>
+        </div>
+        <div class="mb-3">
+            <input class="form-control" name="confirmation" type="password" placeholder="Confirm Password" required>
+        </div>
+        <button class="btn btn-primary" type="submit">Register</button>
+    </form>
+</div>
 {% endblock %}
