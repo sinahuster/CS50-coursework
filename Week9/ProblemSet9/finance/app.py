@@ -136,14 +136,18 @@ def register():
             return apology("The passwords do not match")
 
         # Hash the password
-        hash = generate_password_hash(password)
+        password_hash = generate_password_hash(password)
 
         # Try the insert the person into the database
         try:
-            new_user_id = db.execute("INSERT INTO users (username, hash) VALUES (?, ?)", username, hash)
+            new_user_id = db.execute("INSERT INTO users (username, hash) VALUES (?, ?)", username, password_hash)
 
         except ValueError:
             return apology("This username already exsists")
+
+        # Check in case ValueError wasn't raised
+        if not new_user_id:
+            return apology("This username already exists")
 
         # Log in the user automatically
         session["user_id"] = new_user_id
