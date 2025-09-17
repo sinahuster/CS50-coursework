@@ -59,11 +59,14 @@ def buy():
         # Determine the stock the symbol belongs to
         stock = lookup(symbol)
 
-        # Check if the stock exsists 
+        # Check if the stock exsists
         if stock == None:
             return apology("This symbol does not exsist")
 
+        
 
+        # Redirect user to home page
+        return redirect("/")
 
     # User reached route via GET (as by clicking a link or via redirect)
     else:
