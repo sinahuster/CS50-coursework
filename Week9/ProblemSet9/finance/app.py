@@ -66,7 +66,7 @@ def buy():
         # Determine the current price of the stocks
         curr_price = stock.price
 
-        cash = db.execute("SELECT )
+        cash = db.execute("SELECT cash FROM users WHERE id = user_id")
 
         # Redirect user to home page
         return redirect("/")
