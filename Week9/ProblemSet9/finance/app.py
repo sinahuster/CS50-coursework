@@ -46,7 +46,15 @@ def buy():
     if request.method == "POST":
         symbol = request.form.get("symbol")
 
-        
+        if not symbol:
+            return apology("Please input a symbol")
+
+        stock = lookup(symbol)
+
+        if stock == None:
+            return apology("This symbol does not exsist")
+
+
 
     # User reached route via GET (as by clicking a link or via redirect)
     else:
