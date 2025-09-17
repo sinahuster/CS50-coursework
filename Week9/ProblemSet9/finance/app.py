@@ -63,7 +63,10 @@ def buy():
         if stock == None:
             return apology("This symbol does not exsist")
 
-        
+        # Determine the current price of the stocks
+        curr_price = stock.price
+
+        cash = db.execute("SELECT )
 
         # Redirect user to home page
         return redirect("/")
