@@ -107,11 +107,24 @@ def logout():
 def quote():
     """Get stock quote."""
 
+    # If the user has reached the route POST
     if request.method == "POST":
         symbol = request.form.get("symbol")
-        
 
-    return apology("TODO")
+        # Check if the symbol is blank
+        if not symbol:
+            return apology("Please enter a symbol")
+
+        stock = lookup(symbol)
+
+        if (stock == None):
+            return apology("This symbol does not exsist")
+
+        return render_template("quoted.html", stock=stock)
+
+    # User reached route via GET (as by clicking a link or via redirect)
+    else:
+       return render_template("quote.html")
 
 
 @app.route("/register", methods=["GET", "POST"])
