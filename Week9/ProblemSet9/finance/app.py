@@ -43,14 +43,23 @@ def index():
 def buy():
     """Buy shares of stock"""
 
+    # User reached route via POST
     if request.method == "POST":
         symbol = request.form.get("symbol")
+        shares = request.form.get("shares")
 
+        # Check the user input a symbol
         if not symbol:
             return apology("Please input a symbol")
 
+        # Check the user input a number of shares
+        if not shares:
+            return apology("Please input a number of shares")
+
+        # Determine the stock the symbol belongs to
         stock = lookup(symbol)
 
+        # Check if the stock exsists 
         if stock == None:
             return apology("This symbol does not exsist")
 
