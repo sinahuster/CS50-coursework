@@ -71,7 +71,9 @@ def buy():
 
         # Check the user can afford to buy these shares
 
-        # Create 
+        # Create new table to track purchase
+
+        # 
 
         # Redirect user to home page
         return redirect("/")
