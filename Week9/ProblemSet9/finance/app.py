@@ -66,7 +66,12 @@ def buy():
         # Determine the current price of the stocks
         curr_price = stock.price
 
+        # Determine how much cash the user has avaliable
         cash = db.execute("SELECT cash FROM users WHERE id = user_id")
+
+        # Check the user can afford to buy these shares
+
+        # Create 
 
         # Redirect user to home page
         return redirect("/")
