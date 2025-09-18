@@ -70,10 +70,12 @@ def buy():
         cash = db.execute("SELECT cash FROM users WHERE id = user_id")
 
         # Check the user can afford to buy these shares
+        if curr_price * stock < cash:
+            return apology("Unfortunately, you do not have the funds to buy the stocks")
 
         # Create new table to track purchase
 
-        # 
+        #
 
         # Redirect user to home page
         return redirect("/")
