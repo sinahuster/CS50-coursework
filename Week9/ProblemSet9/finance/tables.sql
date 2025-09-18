@@ -1,2 +1,2 @@
 CREATE TABLE purchases (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, user_id INTEGER NOT NULL,
-symbol TEXT NOT NULL, price FLOAT NOT NULL, purchase_time DATETIME, FOR)
+symbol TEXT NOT NULL, price FLOAT NOT NULL, purchase_time DATETIME, FOREIGN KEY (user_id) REFERENCES users(id));
