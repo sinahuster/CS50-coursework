@@ -67,6 +67,8 @@ def buy():
         # Determine how much cash the user has avaliable
         cash = db.execute("SELECT cash FROM users WHERE id = ?", session["user_id"])
 
+        print(type(shares))
+
         # Check the user can afford to buy these shares
         cash_spent = stock["price"] * shares
         if cash_spent < cash:
