@@ -64,14 +64,11 @@ def buy():
         if stock == None:
             return apology("This symbol does not exsist")
 
-        # Determine the current price of the stocks
-        curr_price = stock.price
-
         # Determine how much cash the user has avaliable
         cash = db.execute("SELECT cash FROM users WHERE id = user_id")
 
         # Check the user can afford to buy these shares
-        cash_spent = curr_price * stock
+        cash_spent = stock.price * shares
         if cash_spent < cash:
             return apology("Unfortunately, you do not have the funds to buy these stocks")
 
