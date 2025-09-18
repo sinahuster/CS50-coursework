@@ -69,7 +69,7 @@ def buy():
 
         # Check the user can afford to buy these shares
         cash_spent = stock["price"] * int(shares)
-        if cash_spent < cash[0]["cash"]:
+        if cash_spent > cash[0]["cash"]:
             return apology("Unfortunately, you do not have the funds to buy these stocks")
 
         # Add the purchase to the table
@@ -77,8 +77,8 @@ def buy():
                    session["user_id"], symbol, cash_spent, datetime.datetime.now())
 
         # Determine the new value of cash for the user
-        cash = cash - cash_spent
-        db.execute("UPDATE users SET cash = ? WHERE id = ?", cash, session["user_id"])
+        cash[0]["cash"] = cash[0]["cash"] - cash_spent
+        db.execute("UPDATE users SET cash = ? WHERE id = ?", cash[0]["cash"], session["user_id"])
 
         # Redirect user to home page
         return redirect("/")
