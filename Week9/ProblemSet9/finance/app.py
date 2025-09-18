@@ -69,7 +69,7 @@ def buy():
 
         # Check the user can afford to buy these shares
         cash_spent = stock["price"] * int(shares)
-        if cash_spent < cash:
+        if cash_spent < cash[0]["cash"]:
             return apology("Unfortunately, you do not have the funds to buy these stocks")
 
         # Add the purchase to the table
