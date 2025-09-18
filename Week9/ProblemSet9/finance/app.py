@@ -68,7 +68,7 @@ def buy():
         cash = db.execute("SELECT cash FROM users WHERE id = ?", session["user_id"])
 
         # Check the user can afford to buy these shares
-        cash_spent = stock.price * shares
+        cash_spent = stock["price"] * shares
         if cash_spent < cash:
             return apology("Unfortunately, you do not have the funds to buy these stocks")
 
