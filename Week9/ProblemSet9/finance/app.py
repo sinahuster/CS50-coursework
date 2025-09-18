@@ -73,9 +73,10 @@ def buy():
         if curr_price * stock < cash:
             return apology("Unfortunately, you do not have the funds to buy these stocks")
 
-        # Create new table to track purchase
-
         # Add the purchase to the table
+        db.execute(INSERT INTO purchases )
+
+        # Determine the new value of cash for the user
 
         # Redirect user to home page
         return redirect("/")
