@@ -1,4 +1,5 @@
 import os
+import datetime
 
 from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, request, session
@@ -70,14 +71,17 @@ def buy():
         cash = db.execute("SELECT cash FROM users WHERE id = user_id")
 
         # Check the user can afford to buy these shares
-        if curr_price * stock < cash:
+        cash_spent = curr_price * stock
+        if cash_spent < cash:
             return apology("Unfortunately, you do not have the funds to buy these stocks")
 
         # Add the purchase to the table
         db.execute("INSERT INTO purchases (user_id, symbol, price, purchase_time) VALUES (?, ?, ?, ?)",
-                   user_id, symbol, curr_price*stock, )
+                   user_id, symbol, cash_spent, datetime.datetime.now())
 
         # Determine the new value of cash for the user
+        cash = cash - cash_spent
+        db.execute("INSERT INTO users (cash) VALUES (?)", cash)
 
         # Redirect user to home page
         return redirect("/")
