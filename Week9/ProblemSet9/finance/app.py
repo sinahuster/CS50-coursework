@@ -78,7 +78,7 @@ def buy():
 
         # Determine the new value of cash for the user
         cash = cash - cash_spent
-        db.execute("UPDATE users (cash) VALUES (?)", cash)
+        db.execute("UPDATE users SET cash = ? WHERE id = user_id", cash)
 
         # Redirect user to home page
         return redirect("/")
