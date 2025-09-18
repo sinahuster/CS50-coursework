@@ -65,7 +65,7 @@ def buy():
             return apology("This symbol does not exsist")
 
         # Determine how much cash the user has avaliable
-        cash = db.execute("SELECT cash FROM users WHERE id = ?", user_id)
+        cash = db.execute("SELECT cash FROM users WHERE id = ?", session["user_id"])
 
         # Check the user can afford to buy these shares
         cash_spent = stock.price * shares
@@ -74,11 +74,11 @@ def buy():
 
         # Add the purchase to the table
         db.execute("INSERT INTO purchases (user_id, symbol, price, purchase_time) VALUES (?, ?, ?, ?)",
-                   user_id, symbol, cash_spent, datetime.datetime.now())
+                   session["user_id"], symbol, cash_spent, datetime.datetime.now())
 
         # Determine the new value of cash for the user
         cash = cash - cash_spent
-        db.execute("UPDATE users SET cash = ? WHERE id = ?", cash, user_id)
+        db.execute("UPDATE users SET cash = ? WHERE id = ?", cash, session["user_id"])
 
         # Redirect user to home page
         return redirect("/")
