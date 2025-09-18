@@ -74,7 +74,8 @@ def buy():
             return apology("Unfortunately, you do not have the funds to buy these stocks")
 
         # Add the purchase to the table
-        db.execute(INSERT INTO purchases )
+        db.execute("INSERT INTO purchases (user_id, symbol, price, purchase_time) VALUES (?, ?, ?, ?)",
+                   user_id, symbol, curr_price*stock, )
 
         # Determine the new value of cash for the user
 
