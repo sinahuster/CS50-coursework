@@ -43,15 +43,22 @@ def index():
 
     portfolio = []
 
-    stock_value = 0
+    total_stock_value = 0
 
     for stock in purchases:
         symbol = stock["symbol"]
         shares = stock["shares"]
         price = lookup(symbol)["price"]
-        total_value = shares * price
+        stock_value = shares * price
 
-        total_stock_value += total_
+        total_stock_value += stock_value
+
+        portfolio.append({
+            "symbol" : symbol
+            "shares" : shares
+            "price" : price
+            "stock value" : stock_value
+        })
 
     total = total_value + cash_avaliable
 
