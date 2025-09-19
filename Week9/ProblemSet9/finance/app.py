@@ -47,7 +47,12 @@ def index():
     grouped = []
     for stock in purchases:
         symbol = stock["symbol"]
+        if symbol in grouped:
+            group[symbol] =+ stock["shares"]
+        else:
+            group[symbol] = stock["shares"]
 
+    # For each symbol, find the current shares value price and total share value
     portfolio = []
 
     total_stock_value = 0
