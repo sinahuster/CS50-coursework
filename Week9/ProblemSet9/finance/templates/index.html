@@ -12,12 +12,12 @@
     </tr>
   </thead>
   <tbody>
-    {% for stock in purchases %}
+    {% for stock in portfolio %}
     <tr>
         <td>{{ stock.symbol }}</td>
         <td>{{ stock.shares }}</td>
-        <td>$ {{ share_value }}</td>
-        <td>$ {{ stock.price * stock.shares }}</td>
+        <td>$ {{ stock.price }}</td>
+        <td>$ {{ stock.stock_value }}</td>
     </tr>
     {% endfor %}
     <tr>

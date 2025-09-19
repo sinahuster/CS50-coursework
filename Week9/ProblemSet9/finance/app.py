@@ -54,10 +54,10 @@ def index():
         total_stock_value += stock_value
 
         portfolio.append({
-            "symbol" : symbol
-            "shares" : shares
-            "price" : price
-            "stock value" : stock_value
+            "symbol" : symbol,
+            "shares" : shares,
+            "price" : price,
+            "stock_value" : stock_value,
         })
 
     total = total_stock_value + cash_avaliable
