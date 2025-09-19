@@ -38,7 +38,7 @@ def index():
     """Show portfolio of stocks"""
 
     # Determine the avaliable cash of the user
-    cash_avaliable = db.execute("SELECT cash FROM users WHERE id = ?", session["user_id"])[0]["cash"]
+    cash_avaliable = usd(db.execute("SELECT cash FROM users WHERE id = ?", session["user_id"])[0]["cash"])
 
     # Find all the purchases of the user
     purchases = db.execute("SELECT * from purchases WHERE user_id = ?", session["user_id"])
@@ -46,7 +46,7 @@ def index():
     # Group together the purchases by symbol
     grouped = {}
     for stock in purchases:
-        symbol = stock["symbol"]
+        symbol = stock["symbol"].upper()
         if symbol in grouped:
             grouped[symbol] += stock["shares"]
         else:
@@ -67,11 +67,11 @@ def index():
         portfolio.append({
             "symbol" : symbol,
             "shares" : shares,
-            "price" : price,
-            "stock_value" : stock_value,
+            "price" : usd(price),
+            "stock_value" : usd(stock_value),
         })
 
-    total = total_stock_value + cash_avaliable
+    total = usd(total_stock_value + cash_avaliable)
 
     return render_template("index.html", portfolio=portfolio, cash=cash_avaliable, total=total)
 
