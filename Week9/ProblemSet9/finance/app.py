@@ -39,6 +39,9 @@ def index():
 
     cash_avaliable = db.execute("SELECT cash FROM users WHERE id = ?", session["user_id"])
 
+    
+
+
     return render_template("index.html")
 
 
