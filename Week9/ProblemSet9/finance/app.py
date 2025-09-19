@@ -37,9 +37,14 @@ def after_request(response):
 def index():
     """Show portfolio of stocks"""
 
+    # Determine the avaliable cash of the user
     cash_avaliable = db.execute("SELECT cash FROM users WHERE id = ?", session["user_id"])[0]["cash"]
 
+    # Find all the purchases of the user
     purchases = db.execute("SELECT * from purchases WHERE user_id = ?", session["user_id"])
+
+    # Group together the purchases by symbol
+    
 
     portfolio = []
 
