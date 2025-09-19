@@ -37,7 +37,7 @@ def after_request(response):
 def index():
     """Show portfolio of stocks"""
 
-    
+    cash_avaliable = db.execute("SELECT cash FROM users WHERE )
     return apology("TODO")
 
 
