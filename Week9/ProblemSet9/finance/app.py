@@ -44,13 +44,13 @@ def index():
     purchases = db.execute("SELECT * from purchases WHERE user_id = ?", session["user_id"])
 
     # Group together the purchases by symbol
-    grouped = []
+    grouped = {}
     for stock in purchases:
         symbol = stock["symbol"]
         if symbol in grouped:
-            group[symbol] =+ stock["shares"]
+            grouped[symbol] =+ stock["shares"]
         else:
-            group[symbol] = stock["shares"]
+            grouped[symbol] = stock["shares"]
 
     # For each symbol, find the current shares value price and total share value
     portfolio = []
