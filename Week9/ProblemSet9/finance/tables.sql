@@ -12,3 +12,18 @@ CREATE TABLE sqlite_sequence(name,seq);
 CREATE UNIQUE INDEX username ON users (username);
 CREATE TABLE purchases (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, user_id INTEGER NOT NULL,
 symbol TEXT NOT NULL, price FLOAT NOT NULL, purchase_time DATETIME, total FLOAT, FOREIGN KEY (user_id) REFERENCES users(id));
+
+
+ALTER TABLE purchases
+    DROP COLUMN total;
+
+ALTER TABLE purchases
+    ADD shares INTEGER;
+
+
+.schema
+CREATE TABLE users (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, username TEXT NOT NULL, hash TEXT NOT NULL, cash NUMERIC NOT NULL DEFAULT 10000.00);
+CREATE TABLE sqlite_sequence(name,seq);
+CREATE UNIQUE INDEX username ON users (username);
+CREATE TABLE purchases (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, user_id INTEGER NOT NULL,
+symbol TEXT NOT NULL, price FLOAT NOT NULL, purchase_time DATETIME, shares INTEGER, FOREIGN KEY (user_id) REFERENCES users(id));

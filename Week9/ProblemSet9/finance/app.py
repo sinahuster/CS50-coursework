@@ -37,15 +37,23 @@ def after_request(response):
 def index():
     """Show portfolio of stocks"""
 
-    cash_avaliable = db.execute("SELECT cash FROM users WHERE id = ?", session["user_id"])
+    cash_avaliable = db.execute("SELECT cash FROM users WHERE id = ?", session["user_id"])[0]["cash"]
 
-    rows = db.execute("SELECT * from purchases WHERE id = ?", session["user_id"])
+    purchases = db.execute("SELECT * from purchases WHERE user_id = ?", session["user_id"])
 
-    for i in rows:
-        
+    portfolio = []
+
+    for stock in purchases:
+        symbol = stock["symbol"]
+        shares = stock["shares"]
+        price = lookup(symbol)["price"]
+        total_value = shares * price
 
 
-    return render_template("index.html")
+
+    total = total_value + cash_avaliable
+
+    return render_template("index.html", purchases=purchases, cash=cash_avaliable, total=total, share_value=current_share_value)
 
 
 @app.route("/buy", methods=["GET", "POST"])
@@ -82,8 +90,8 @@ def buy():
             return apology("Unfortunately, you do not have the funds to buy these stocks")
 
         # Add the purchase to the table
-        db.execute("INSERT INTO purchases (user_id, symbol, price, purchase_time, total) VALUES (?, ?, ?, ?)",
-                   session["user_id"], symbol, stock["price"], datetime.datetime.now(), cash_spent)
+        db.execute("INSERT INTO purchases (user_id, symbol, price, purchase_time, shares) VALUES (?, ?, ?, ?, ?)",
+                   session["user_id"], symbol, stock["price"], datetime.datetime.now(), int(shares))
 
         # Determine the new value of cash for the user
         cash[0]["cash"] = cash[0]["cash"] - cash_spent

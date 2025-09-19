@@ -3,18 +3,36 @@
 {% block main %}
 
 <table style="width:100%">
-  <tr>
-    <th>Symbol</th>
-    <th>Shares</th>
-    <th>Price</th>
-    <th>TOTAL</th>
-  </tr>
-  <tr>
-    <td>E</td>
-    <td>4</td>
-    <td>$31.11</td>
-    <td>$124.44</td>
-  </tr>
+  <thead>
+    <tr>
+      <th>Symbol</th>
+      <th>Shares</th>
+      <th>Price</th>
+      <th>TOTAL</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for stock in purchases %}
+    <tr>
+        <td>{{ stock.symbol }}</td>
+        <td>{{ stock.shares }}</td>
+        <td>$ {{ share_value }}</td>
+        <td>$ {{ stock.price * stock.shares }}</td>
+    </tr>
+    {% endfor %}
+    <tr>
+      <td></td>
+      <td></td>
+      <th>Cash</th>
+      <td>$ {{ cash }}</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <th>TOTAL</th>
+      <td>$ {{ total }}</td>
+    </tr>
+  </tbody>
 </table>
 
 
