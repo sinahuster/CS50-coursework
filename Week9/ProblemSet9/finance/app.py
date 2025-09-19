@@ -39,7 +39,10 @@ def index():
 
     cash_avaliable = db.execute("SELECT cash FROM users WHERE id = ?", session["user_id"])
 
-    
+    rows = db.execute("SELECT * from purchases WHERE id = ?", session["user_id"])
+
+    for i in rows:
+        
 
 
     return render_template("index.html")
