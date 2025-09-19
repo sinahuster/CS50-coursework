@@ -60,9 +60,9 @@ def index():
             "stock value" : stock_value
         })
 
-    total = total_value + cash_avaliable
+    total = total_stock_value + cash_avaliable
 
-    return render_template("index.html", purchases=purchases, cash=cash_avaliable, total=total, share_value=current_share_value)
+    return render_template("index.html", portfolio=portfolio, cash=cash_avaliable, total=total)
 
 
 @app.route("/buy", methods=["GET", "POST"])
