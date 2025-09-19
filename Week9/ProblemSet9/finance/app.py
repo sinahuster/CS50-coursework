@@ -38,8 +38,8 @@ def index():
     """Show portfolio of stocks"""
 
     cash_avaliable = db.execute("SELECT cash FROM users WHERE id = ?", session["user_id"])
-    
-    return apology("TODO")
+
+    return render_template("index.html")
 
 
 @app.route("/buy", methods=["GET", "POST"])
