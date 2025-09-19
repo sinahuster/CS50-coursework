@@ -3,5 +3,5 @@ symbol TEXT NOT NULL, price FLOAT NOT NULL, purchase_time DATETIME, FOREIGN KEY 
 
 
 ALTER TABLE purchases
-    ADD total FLOAT NOT NULL;
+    ADD total FLOAT;
 
