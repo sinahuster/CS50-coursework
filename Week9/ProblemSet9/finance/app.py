@@ -48,7 +48,7 @@ def index():
     for stock in purchases:
         symbol = stock["symbol"]
         if symbol in grouped:
-            grouped[symbol] =+ stock["shares"]
+            grouped[symbol] += stock["shares"]
         else:
             grouped[symbol] = stock["shares"]
 
@@ -57,7 +57,7 @@ def index():
 
     total_stock_value = 0
 
-    for symbol, shares in purchases:
+    for symbol, shares in grouped.items():
         quote = lookup(symbol)
         price = quote["price"]
         stock_value = shares * price
