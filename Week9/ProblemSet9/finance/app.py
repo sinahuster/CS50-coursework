@@ -57,10 +57,9 @@ def index():
 
     total_stock_value = 0
 
-    for stock in purchases:
-        symbol = stock["symbol"]
-        shares = stock["shares"]
-        price = lookup(symbol)["price"]
+    for symbol, shares in purchases:
+        quote = lookup(symbol)
+        price = quote["price"]
         stock_value = shares * price
 
         total_stock_value += stock_value
