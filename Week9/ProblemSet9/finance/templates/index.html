@@ -16,21 +16,21 @@
     <tr>
         <td>{{ stock.symbol }}</td>
         <td>{{ stock.shares }}</td>
-        <td>$ {{ stock.price }}</td>
-        <td>$ {{ stock.stock_value }}</td>
+        <td>{{ stock.price }}</td>
+        <td>{{ stock.stock_value }}</td>
     </tr>
     {% endfor %}
     <tr>
       <td></td>
       <td></td>
       <th>Cash</th>
-      <td>$ {{ cash }}</td>
+      <td>{{ cash }}</td>
     </tr>
     <tr>
       <td></td>
       <td></td>
       <th>TOTAL</th>
-      <td>$ {{ total }}</td>
+      <td>{{ total }}</td>
     </tr>
   </tbody>
 </table>

@@ -38,7 +38,7 @@ def index():
     """Show portfolio of stocks"""
 
     # Determine the avaliable cash of the user
-    cash_avaliable = usd(db.execute("SELECT cash FROM users WHERE id = ?", session["user_id"])[0]["cash"])
+    cash_avaliable = db.execute("SELECT cash FROM users WHERE id = ?", session["user_id"])[0]["cash"]
 
     # Find all the purchases of the user
     purchases = db.execute("SELECT * from purchases WHERE user_id = ?", session["user_id"])
@@ -72,6 +72,7 @@ def index():
         })
 
     total = usd(total_stock_value + cash_avaliable)
+    cash_avaliable = usd(cash_avaliable)
 
     return render_template("index.html", portfolio=portfolio, cash=cash_avaliable, total=total)
 
