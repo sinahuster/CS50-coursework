@@ -44,7 +44,9 @@ def index():
     purchases = db.execute("SELECT * from purchases WHERE user_id = ?", session["user_id"])
 
     # Group together the purchases by symbol
-    
+    grouped = []
+    for stock in purchases:
+        symbol = stock["symbol"]
 
     portfolio = []
 
