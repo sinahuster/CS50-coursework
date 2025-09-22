@@ -42,7 +42,7 @@ def index():
 
     # Find all the purchases of the user
     # purchases = db.execute("SELECT * from purchases WHERE user_id = ?", session["user_id"])
-    purchases = db.execute("SELECT symbol, SUM(shares) from purchases GROUP BY symbol WHERE user_id = ?", session["user_id"])
+    purchases = db.execute("SELECT UPPER(symbol) as symbol, SUM(shares) as shares from purchases WHERE user_id = ? GROUP BY UPPER(symbol)", session["user_id"])
 
     # Group together the purchases by symbol
     grouped = {}
