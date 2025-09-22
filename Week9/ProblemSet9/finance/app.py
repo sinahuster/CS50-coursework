@@ -112,8 +112,11 @@ def buy():
             return apology("Unfortunately, you do not have the funds to buy these stocks")
 
         # Add the purchase to the table
-        db.execute("INSERT INTO purchases (user_id, symbol, price, purchase_time, shares) VALUES (?, ?, ?, ?, ?)",
+        db.execute("INSERT INTO transactions (user_id, symbol, price, purchase_time, shares) VALUES (?, ?, ?, ?, ?)",
                    session["user_id"], symbol.upper(), stock["price"], datetime.datetime.now(), int(shares))
+
+        # Add to portfolio
+        rows = db.execute("SELECT shares FROM portfolio WHERE )
 
         # Determine the new value of cash for the user
         cash[0]["cash"] = cash[0]["cash"] - cash_spent
