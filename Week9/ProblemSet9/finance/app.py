@@ -41,12 +41,12 @@ def index():
     cash_avaliable = db.execute("SELECT cash FROM users WHERE id = ?", session["user_id"])[0]["cash"]
 
     # Find all the purchases of the user
-    # purchases = db.execute("SELECT * from purchases WHERE user_id = ?", session["user_id"])
-    purchases = db.execute("SELECT UPPER(symbol) as symbol, SUM(shares) as shares from purchases WHERE user_id = ? GROUP BY UPPER(symbol)", session["user_id"])
+    # transactions = db.execute("SELECT * from transactions WHERE user_id = ?", session["user_id"])
+    transactions = db.execute("SELECT UPPER(symbol) as symbol, SUM(shares) as shares from transaction WHERE user_id = ? GROUP BY UPPER(symbol)", session["user_id"])
 
     # Group together the purchases by symbol
     grouped = {}
-    for stock in purchases:
+    for stock in transactions:
         symbol = stock["symbol"].upper()
         if symbol in grouped:
             grouped[symbol] += stock["shares"]
