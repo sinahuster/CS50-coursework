@@ -27,3 +27,6 @@ CREATE TABLE sqlite_sequence(name,seq);
 CREATE UNIQUE INDEX username ON users (username);
 CREATE TABLE purchases (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, user_id INTEGER NOT NULL,
 symbol TEXT NOT NULL, price FLOAT NOT NULL, purchase_time DATETIME, shares INTEGER, FOREIGN KEY (user_id) REFERENCES users(id));
+
+
+CREATE TABLE transactions ()
