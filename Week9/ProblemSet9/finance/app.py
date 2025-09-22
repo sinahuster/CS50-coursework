@@ -118,7 +118,9 @@ def buy():
         # Add to portfolio
         rows = db.execute("SELECT shares FROM portfolio WHERE symbol = ?", symbol.upper())
         if len(rows) == 1:
-            db.execute("UPDATE shares WHERE )
+            db.execute("UPDATE portfolio SET shares = shares + ? WHERE user_id = ?", shares, session["user_id"])
+        else:
+            db.execute("INSERT INTO portfolio (user_id, symbol, shares) VALUES (?, ?, ?)" sessions["user_id"], symbol.upper(), shares)
 
         # Determine the new value of cash for the user
         cash[0]["cash"] = cash[0]["cash"] - cash_spent
