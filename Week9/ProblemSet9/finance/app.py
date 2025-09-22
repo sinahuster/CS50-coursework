@@ -41,17 +41,7 @@ def index():
     cash_avaliable = db.execute("SELECT cash FROM users WHERE id = ?", session["user_id"])[0]["cash"]
 
     # Find all the purchases of the user
-    # transactions = db.execute("SELECT * from transactions WHERE user_id = ?", session["user_id"])
-    transactions = db.execute("SELECT UPPER(symbol) as symbol, SUM(shares) as shares from transaction WHERE user_id = ? GROUP BY UPPER(symbol)", session["user_id"])
-
-    # Group together the purchases by symbol
-    grouped = {}
-    for stock in transactions:
-        symbol = stock["symbol"].upper()
-        if symbol in grouped:
-            grouped[symbol] += stock["shares"]
-        else:
-            grouped[symbol] = stock["shares"]
+    portfolio = db.execute("SELECT symbol, shares FROM portfolio WHERE user_id = ?", session["user_id"])
 
     # For each symbol, find the current shares value price and total share value
     current = []
