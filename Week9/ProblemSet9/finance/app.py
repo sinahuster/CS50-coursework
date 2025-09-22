@@ -130,7 +130,29 @@ def buy():
 @login_required
 def history():
     """Show history of transactions"""
-    return apology("TODO")
+
+    # Find all previous transactions
+    transactions = db.execute("SELECT symbol, shares, price, purchase_time FROM transactions WHERE user_id = ?", session["user_id"])
+
+    history = []
+
+    for row in transactions:
+
+        if int(row["shares"]) > 0:
+            type = "bought"
+        else:
+            type = "sold"
+
+        history.append({
+            "symbol" : row["symbol"],
+            "shares" : abs(row["shares"]),
+            "price" : usd(row["price"]),
+            "type": type,
+            "time": row["purchase_time"]
+        })
+
+
+    return render_template("history.html", history=history)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -272,7 +294,7 @@ def sell():
     # If the user reached route POST
     if request.method == "POST":
         symbol = request.form.get("symbol")
-        shares = request.form.get("shares")
+        shares = int(request.form.get("shares"))
 
         # Check the user has input a symbol
         if not symbol:
@@ -290,14 +312,23 @@ def sell():
 
         owned_shares = rows[0]["shares"]
 
-        if owned_shares < shares:
+        if owned_shares == shares:
+            db.execute("DELETE FROM portfolio WHERE symbol = ? AND user_id = ?", symbol, session["user_id"])
+
+        elif owned_shares < shares:
             return apology("You do not have enough shares in this stock")
 
+        elif owned_shares > shares:
+            db.execute("UPDATE portfolio SET shares = shares - ? WHERE symbol = ? AND user_id = ?", shares, symbol.upper(), session["user_id"])
+
+
         # Find the current price of the shares
-        quote = lookup(sumbol)
+        quote = lookup(symbol)
         cash_gained = quote["price"] * shares
 
-        
+        db.execute("INSERT INTO transactions (user_id, symbol, price, purchase_time, shares) VALUES (?, ?, ?, ?, ?)",
+                   session["user_id"], symbol.upper(), quote["price"], datetime.datetime.now(), -int(shares))
+
 
         # Redirect to the homepage
         return redirect("/")
@@ -307,3 +338,45 @@ def sell():
         rows = db.execute("SELECT symbol FROM portfolio WHERE user_id = ?", session["user_id"])
         symbols = [rows["symbol"] for rows in rows]
         return render_template("sell.html", symbols=symbols)
+
+
+@app.route("/reset", methods=["GET", "POST"])
+def reset():
+    """Reset the users password"""
+
+    # If user uses method POST
+    if request.method == "POST":
+        username = request.form.get("username")
+        password = request.form.get("password")
+        confirmation = request.form.get("confirmation")
+
+        if not username:
+            return apology("Please enter a username")
+
+        if not password:
+            return apology("Please enter a password")
+
+        if not confirmation or password != confirmation:
+            return apology("Please enter a confirmed password that matches the first one")
+
+        # Check the username exsists
+        users = db.execute("SELECT hash FROM users WHERE username = ?", username)
+
+        if len(users) != 1:
+            return apology("This username doesn't exsist")
+
+        # Check if new password is equal to the old one
+        new_hash = generate_password_hash(password)
+
+        if new_hash == users[0]["hash"]:
+            return apology("You cannot use the same password again")
+
+        db.execute("UPDATE users SET hash = ? WHERE username = ?", new_hash, username)
+
+
+        # Redirect to login
+        return redirect("/login")
+
+    # If user uses route is GET
+    else:
+        return render_template("reset.html")
