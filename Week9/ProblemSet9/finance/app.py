@@ -116,7 +116,9 @@ def buy():
                    session["user_id"], symbol.upper(), stock["price"], datetime.datetime.now(), int(shares))
 
         # Add to portfolio
-        rows = db.execute("SELECT shares FROM portfolio WHERE )
+        rows = db.execute("SELECT shares FROM portfolio WHERE symbol = ?", symbol.upper())
+        if len(rows) == 1:
+            db.execute("UPDATE )
 
         # Determine the new value of cash for the user
         cash[0]["cash"] = cash[0]["cash"] - cash_spent
