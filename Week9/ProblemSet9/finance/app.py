@@ -112,7 +112,7 @@ def buy():
         if len(rows) == 1:
             db.execute("UPDATE portfolio SET shares = shares + ? WHERE symbol = ? AND user_id = ?", shares, symbol.upper(), session["user_id"])
         else:
-            db.execute("INSERT INTO portfolio (user_id, symbol, shares) VALUES (?, ?, ?)", sessions["user_id"], symbol.upper(), shares)
+            db.execute("INSERT INTO portfolio (user_id, symbol, shares) VALUES (?, ?, ?)", session["user_id"], symbol.upper(), shares)
 
         # Determine the new value of cash for the user
         cash[0]["cash"] = cash[0]["cash"] - cash_spent
@@ -283,8 +283,7 @@ def sell():
             return apology("Please enter a positive number of shares")
 
         # Find the symbols and shares of the stocks which are owned
-        rows = db.execute("SELECT shares FROM purchases WHERE user_id = ? AND symbol = ?", session["user_id"], symbol)
-
+        rows = db.execute("SELECT shares FROM portfolio WHERE user_id = ? AND symbol = ?", session["user_id"], symbol)
 
         if len(rows) != 1:
             return apology("You do not have any shares in this stock")
@@ -294,25 +293,17 @@ def sell():
         if owned_shares < shares:
             return apology("You do not have enough shares in this stock")
 
-
         # Find the current price of the shares
         quote = lookup(sumbol)
         cash_gained = quote["price"] * shares
 
-        # Add the sold cash to the users cash avaliable
-        cash = db.execute("SELECT cash FROM users WHERE id = ?", session["user_id"])
-        cash[0]["cash"] = cash[0]["cash"] + cash_gained
-        db.execute("UPDATE users SET cash = ? WHERE id = ?", cash[0]["cash"], session["user_id"])
 
-        # Add the transaction to the purchases table
-        db.execute("INSERT INTO purchases (user_id, symbol, price, purchase_time, shares) VALUES (?, ?, ?, ?, ?)",
-                   session["user_id"], symbol, stock["price"], datetime.datetime.now(), -int(shares))
 
         # Redirect to the homepage
         return redirect("/")
 
     # If the user reached route GET
     else:
-        rows = db.execute("SELECT UPPER(symbol) as symbol FROM purchases WHERE user_id = ? GROUP BY symbol", session["user_id"])
+        rows = db.execute("SELECT symbol FROM portfolio WHERE user_id = ?", session["user_id"])
         symbols = [rows["symbol"] for rows in rows]
         return render_template("sell.html", symbols=symbols)
