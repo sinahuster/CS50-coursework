@@ -54,7 +54,7 @@ def index():
             grouped[symbol] = stock["shares"]
 
     # For each symbol, find the current shares value price and total share value
-    portfolio = []
+    current = []
 
     total_stock_value = 0
 
@@ -65,7 +65,7 @@ def index():
 
         total_stock_value += stock_value
 
-        portfolio.append({
+        current.append({
             "symbol" : symbol,
             "shares" : shares,
             "price" : usd(price),
@@ -75,7 +75,7 @@ def index():
     total = usd(total_stock_value + cash_avaliable)
     cash_avaliable = usd(cash_avaliable)
 
-    return render_template("index.html", portfolio=portfolio, cash=cash_avaliable, total=total)
+    return render_template("index.html", portfolio=current, cash=cash_avaliable, total=total)
 
 
 @app.route("/buy", methods=["GET", "POST"])
