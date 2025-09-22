@@ -297,7 +297,7 @@ def sell():
         quote = lookup(sumbol)
         cash_gained = quote["price"] * shares
 
-
+        
 
         # Redirect to the homepage
         return redirect("/")
