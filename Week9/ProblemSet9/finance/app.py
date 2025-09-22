@@ -113,7 +113,7 @@ def buy():
 
         # Add the purchase to the table
         db.execute("INSERT INTO purchases (user_id, symbol, price, purchase_time, shares) VALUES (?, ?, ?, ?, ?)",
-                   session["user_id"], symbol, stock["price"], datetime.datetime.now(), int(shares))
+                   session["user_id"], symbol.upper(), stock["price"], datetime.datetime.now(), int(shares))
 
         # Determine the new value of cash for the user
         cash[0]["cash"] = cash[0]["cash"] - cash_spent
@@ -269,4 +269,51 @@ def register():
 @login_required
 def sell():
     """Sell shares of stock"""
-    return apology("TODO")
+
+    # If the user reached route POST
+    if request.method == "POST":
+        symbol = request.form.get("symbol")
+        shares = request.form.get("shares")
+
+        # Check the user has input a symbol
+        if not symbol:
+            return apology("Please enter a symbol")
+
+        # Check the use rhas put in a positive number of shares to sell
+        if not shares or shares < 1:
+            return apology("Please enter a positive number of shares")
+
+        # Find the symbols and shares of the stocks which are owned
+        rows = db.execute("SELECT shares FROM purchases WHERE user_id = ? AND symbol = ?", session["user_id"], symbol)
+
+
+        if len(rows) != 1:
+            return apology("You do not have any shares in this stock")
+
+        owned_shares = rows[0]["shares"]
+
+        if owned_shares < shares:
+            return apology("You do not have enough shares in this stock")
+
+
+        # Find the current price of the shares
+        quote = lookup(sumbol)
+        cash_gained = quote["price"] * shares
+
+        # Add the sold cash to the users cash avaliable
+        cash = db.execute("SELECT cash FROM users WHERE id = ?", session["user_id"])
+        cash[0]["cash"] = cash[0]["cash"] + cash_gained
+        db.execute("UPDATE users SET cash = ? WHERE id = ?", cash[0]["cash"], session["user_id"])
+
+        # Add the transaction to the purchases table
+        db.execute("INSERT INTO purchases (user_id, symbol, price, purchase_time, shares) VALUES (?, ?, ?, ?, ?)",
+                   session["user_id"], symbol, stock["price"], datetime.datetime.now(), -int(shares))
+
+        # Redirect to the homepage
+        return redirect("/")
+
+    # If the user reached route GET
+    else:
+        rows = db.execute("SELECT UPPER(symbol) as symbol FROM purchases WHERE user_id = ? GROUP BY symbol", session["user_id"])
+        symbols = [rows["symbol"] for rows in rows]
+        return render_template("sell.html", symbols=symbols)
