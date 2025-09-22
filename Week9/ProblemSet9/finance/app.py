@@ -41,7 +41,7 @@ def index():
     cash_avaliable = db.execute("SELECT cash FROM users WHERE id = ?", session["user_id"])[0]["cash"]
 
     # Find all the purchases of the user
-    portfolio = db.execute("SELECT symbol, shares FROM portfolio WHERE user_id = ?", session["user_id])
+    portfolio = db.execute("SELECT symbol, shares FROM portfolio WHERE user_id = ?", session["user_id"])
 
     # For each symbol, find the current shares value price and total share value
     current = []
@@ -112,7 +112,7 @@ def buy():
         if len(rows) == 1:
             db.execute("UPDATE portfolio SET shares = shares + ? WHERE symbol = ? AND user_id = ?", shares, symbol.upper(), session["user_id"])
         else:
-            db.execute("INSERT INTO portfolio (user_id, symbol, shares) VALUES (?, ?, ?)" sessions["user_id"], symbol.upper(), shares)
+            db.execute("INSERT INTO portfolio (user_id, symbol, shares) VALUES (?, ?, ?)", sessions["user_id"], symbol.upper(), shares)
 
         # Determine the new value of cash for the user
         cash[0]["cash"] = cash[0]["cash"] - cash_spent
